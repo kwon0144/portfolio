@@ -1,6 +1,9 @@
 import { Manrope } from "next/font/google";
 import "./globals.css";
 
+// Components
+import Header from "@/components/Header";
+
 const manrope = Manrope({
   variable: "--font-manrope",
   subsets: ["latin"],
@@ -15,8 +18,31 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={manrope.variable}>
-      <body className="font-main">
-        {children}
+      <body className="font-main" style={{ scrollBehavior: "smooth" }}>
+        <Header /> 
+        <section id="home" className="scroll-mt-28 md:scroll-mt-36 container mx-auto h-screen">
+          {children}
+        </section>
+        <section id="about" className="scroll-mt-28 md:scroll-mt-36 container mx-auto h-screen">
+          <h2 className="text-3xl font-bold mb-8">Resume</h2>
+          <p className="text-lg mb-4">Here is my resume content.</p>
+          <p className="text-lg">Feel free to download it.</p>      
+        </section>
+        <section id="skills" className="scroll-mt-28 md:scroll-mt-36 container mx-auto h-screen">
+          <h2 className="text-3xl font-bold mb-8">Skills</h2>
+          <p className="text-lg mb-4">Here are my skills.</p>
+          <p className="text-lg">I have expertise in various technologies.</p>
+        </section>
+        <section id="projects" className="scroll-mt-28 md:scroll-mt-36 container mx-auto h-screen">
+          <h2 className="text-3xl font-bold mb-8">Projects</h2>
+          <p className="text-lg mb-4">Here are some of my projects.</p>
+          <p className="text-lg">Check them out!</p>
+        </section>
+        <section id="contact" className="scroll-mt-28 md:scroll-mt-36 container mx-auto h-screen">
+          <h2 className="text-3xl font-bold mb-8">Contact</h2>
+          <p className="text-lg mb-4">Feel free to reach out to me.</p>
+          <p className="text-lg">You can find my contact details here.</p>
+        </section>
       </body>
     </html>
   );

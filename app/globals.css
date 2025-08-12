@@ -10,9 +10,19 @@
   --breakpoint-lg: 960px;
   --breakpoint-xl: 1200px;
 
+  /* font sizes */
+  --text-base: 0.75rem;  /* 12px */
+  --text-sm: 0.75rem;   /* 14px */
+  --text-md: 0.875rem;   /* 14px */
+  --text-lg: 1rem;       /* 16px */
+  --text-xl: 1.25rem;    /* 20px */
+
   /* colors */
   --color-background: #FEF3D6;
   --color-foreground: #5C3901;
+  --color-background-start: #FEF3D6;
+  --color-background-mid: #FAEBC1;
+  --color-background-end: #F8DFA6;
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-main: var(--font-manrope);
@@ -45,7 +55,7 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
-  --color-accent: #00FF99;
+  --color-accent: #5C3901;
   --color-accent-hover: #00E187;
 
   /* radius */
@@ -129,7 +139,7 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-primary leading-loose;
+    @apply bg-background text-primary leading-loose text-base;
   }
 
     .container {
