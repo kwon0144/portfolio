@@ -35,7 +35,6 @@ const ThemeToggle = () => {
                 "focus: outline-hidden"
                 )}
             >
-            {" "}
             {isDarkMode ? (
             <Sun className="h-6 w-6 [stroke:currentColor] text-yellow-300"/>)
              : (
