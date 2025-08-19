@@ -74,7 +74,7 @@ const StarBackground = () => {
                 className='meteor animate-meteor' 
                 style={{
                     width: `${meteor.size * 50}px`,
-                    height: `${meteor.size * 2}px`,
+                    height: `${meteor.size * 0.5}px`,
                     left: `${meteor.x}%`,
                     top: `${meteor.y}%`,
                     delay: meteor.opacity,
