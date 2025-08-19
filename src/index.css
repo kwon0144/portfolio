@@ -43,13 +43,13 @@
 
 @layer base {
   :root {
-    --background: 210 40% 98%;
+    --background: 40 100% 95%;
     --foreground: 222 47% 11%;
 
     --card: 0 0% 100%;
 
     --primary: 250 47% 60%;
-    --primary-foreground: 210 40% 98%; /* fixed from 400% */
+    --primary-foreground: 40 100% 95%;
 
     --border: 214 32% 91%;
   }
@@ -72,7 +72,7 @@
 
   body {
     @apply bg-background text-foreground transition-colors duration-300;
-    font-feature-settings: "rlig" 1, "calt" 1; /* added ; */
+    font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
 
@@ -84,7 +84,7 @@
   @media (width >= 768px)  { max-width: 768px; }
   @media (width >= 1024px) { max-width: 1024px; }
   @media (width >= 1280px) { max-width: 1280px; }
-  @media (width >= 1400px) { max-width: 1400px; } /* added px */
+  @media (width >= 1400px) { max-width: 1400px; }
 }
 
 @utility text-glow {
@@ -93,7 +93,7 @@
 }
 
 @utility card-hover {
-  @apply transition-transform duration-300 hover:scale-[1.02] hover:shadow-lg; /* fixed :: */
+  @apply transition-transform duration-300 hover:scale-[1.02] hover:shadow-lg;
 }
 
 @utility gradient-border {
@@ -119,7 +119,7 @@
 }
 
 @utility meteor {
-  @apply absolute bg-gradient-to-r from-white via-white to-transparent rounded-full; /* gradient-to-r */
+  @apply absolute bg-gradient-to-r from-white via-white to-transparent rounded-full;
   box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
 }
 
