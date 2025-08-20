@@ -92,14 +92,13 @@ const ProjectsSection = () => {
               </div>
             </div>
 
-            {/* <div className="flex flex-col md:flex-ro"> */}
             <div className={`${filterOpen ? "flex flex-col gap-4" : "hidden"}`}>
               {categories.map((cat) => (
                 <div
                   key={cat}
                   className="flex items-start gap-6 text-sm"
                 >
-                  {/* label column (fixed width, left-aligned) */}
+                  {/* label column */}
                   <span className="shrink-0 font-semibold capitalize">
                     {cat}:
                   </span>
@@ -124,11 +123,6 @@ const ProjectsSection = () => {
                 </div>
               ))}
             </div>
-
-
-
-
-            {/* </div> */}
         </div>
 
         {/* Projects Grid */}
