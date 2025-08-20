@@ -119,6 +119,23 @@
   hover:shadow-[0_0_10px_rgba(139,92,246,0.5)] hover:scale-105 active:scale-95;
 }
 
+@utility pagination-arrow {
+  @apply px-3 py-1.5 rounded-md bg-foreground/10 text-foreground 
+          hover:bg-foreground/20 disabled:opacity-40;
+}
+
+@utility pagination-num {
+  @apply px-3 py-1.5 rounded-md text-sm;
+}
+
+@utility pagination-num-active {
+  @apply bg-primary text-primary-foreground;
+}
+
+@utility pagination-num-inactive {
+  @apply bg-foreground/10 text-foreground hover:bg-foreground/20;
+}
+
 @utility star {
   @apply absolute rounded-full bg-white;
   box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.4);
