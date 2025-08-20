@@ -2,6 +2,7 @@ import { ExternalLink, Github, Search, ChevronLeft, ChevronRight } from "lucide-
 import { useEffect, useMemo, useState } from "react";
 import { projects } from "../data/projects";
 import { usePageSize, usePagination } from "../hooks/usePagination";
+import { useScrollToSection } from "../hooks/useScrollToSection"
 
 const ProjectsSection = () => {
   // Search
@@ -74,17 +75,12 @@ const ProjectsSection = () => {
     setPage(1);
   }, [submittedQuery, selected, pageSize, setPage]);
 
-  // Smooth scroll to top on page change
-  const scrollToSectionTop = () => {
-    const el = document.getElementById("projects-top");
-    if (!el) return;
-    const OFFSET = 80; // adjust if you have a sticky header
-    const y = el.getBoundingClientRect().top + window.scrollY - OFFSET;
-    window.scrollTo({ top: y, behavior: "smooth" });
-  };
+  // Constants for Scroll Effect
+  const scrollToSectionTop = useScrollToSection("projects-top", 80);
+    
   useEffect(() => {
     scrollToSectionTop();
-  }, [page]);
+  }, [page, scrollToSectionTop]);
 
   return (
     <section id="projects" className="py-16 px-4">

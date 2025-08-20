@@ -3,23 +3,20 @@ import { categories, skills } from "../data/skills";
 import { cn } from "../lib/utils"; 
 import { useEffect, useState } from "react"; 
 import { usePageSize, usePagination } from "../hooks/usePagination"; 
+import { useScrollToSection } from "../hooks/useScrollToSection";
 
 const SkillsSection = () => { 
   
   // Constants for filtering skills by category 
   const [activeCategory, setActiveCategory] = useState("all"); 
+
   const filteredSkills = activeCategory === "all" 
     ? (Object.values(skills).flat()) 
     : skills[activeCategory]; 
 
   // Constants for scrolling effect 
-  const scrollToSectionTop = () => { 
-    const el = document.getElementById("skills-top"); 
-    if (!el) return; 
-    const OFFSET = 80; 
-    const y = el.getBoundingClientRect().top + window.scrollY - OFFSET; 
-    window.scrollTo({ top: y, behavior: "smooth" }); 
-  } 
+  const scrollToSectionTop = useScrollToSection("skills-top", 80);
+
   // Conastants for pagination 
   const pageSize = usePageSize({lg: 18, md:12, sm:8}); 
   const { page, setPage, totalPages, current, getPageButtons } = usePagination(filteredSkills, pageSize); 
@@ -30,9 +27,9 @@ const SkillsSection = () => {
   }, [activeCategory, setPage]); 
   
   // UseEffect for scrolling effect 
-  useEffect(() => { 
-    scrollToSectionTop(); 
-  }, [page]) 
+  useEffect(() => {
+    scrollToSectionTop();
+  }, [page, scrollToSectionTop]);
   
   return ( 
     <section id="skills" className="py-24 px-4 relative bg-secondary/30"> 
