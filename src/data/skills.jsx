@@ -7,7 +7,6 @@ import {
   FaAngular,
   FaVuejs,
   FaNodeJs,
-  FaGitAlt,
   FaAws,
   FaFigma,
   FaDocker,
@@ -33,36 +32,36 @@ import { GiBearHead } from "react-icons/gi";
 
 export const categories = ["all", "frontend", "backend", "cloud & tools"]
 
-export const skills = [
-  // Frontend
-  { name: "HTML 5", Icon: FaHtml5, category: "frontend" },
-  { name: "CSS 3", Icon: FaCss3Alt, category: "frontend" },
-  { name: "JavaScript", Icon: FaJsSquare, category: "frontend" },
-  { name: "TypeScript", Icon: SiTypescript, category: "frontend" },
-  { name: "Angular", Icon: FaAngular, category: "frontend" },
-  { name: "Vue.js", Icon: FaVuejs, category: "frontend" },
-  { name: "React.js", Icon: FaReact, category: "frontend" },
-  { name: "Next.js", Icon: SiNextdotjs, category: "frontend" },
-  { name: "TailwindCSS", Icon: SiTailwindcss, category: "frontend" },
-  { name: "Bootstrap", Icon: FaBootstrap, category: "frontend" },
-  { name: "Redux", Icon: SiRedux, category: "frontend" },
-  { name: "D3.js", Icon: SiD3Dotjs, category: "frontend" },
-  { name: "Zustand", Icon: GiBearHead, category: "frontend" },
-  { name: "Framer Motion", Icon: SiFramer, category: "frontend" },
-
-  // Backend
-  { name: ".Net", Icon: SiDotnet, category: "backend" },
-  { name: "Node.js", Icon: FaNodeJs, category: "backend" },
-  { name: "Django", Icon: SiDjango, category: "backend" },
-  { name: "PostgreSQL", Icon: SiPostgresql, category: "backend" },
-  { name: "MySQL", Icon: SiMysql, category: "backend" },
-
-  // Cloud & Tools
-  // { name: "Git/GitHub", Icon: FaGitAlt, category: "cloud & tools" },
-  { name: "AWS", Icon: FaAws, category: "cloud & tools" },
-  { name: "Azure", Icon: FaMicrosoft, category: "cloud & tools" },
-  { name: "Figma", Icon: FaFigma, category: "cloud & tools" },
-  { name: "Cypress", Icon: SiCypress, category: "cloud & tools" },
-  { name: "Docker", Icon: FaDocker, category: "cloud & tools" },
-  { name: "GitHub Actions", Icon: SiGithubactions, category: "cloud & tools" },
-];
+export const skills = {
+  "frontend": [
+    { name: "HTML 5", Icon: FaHtml5 },
+    { name: "CSS 3", Icon: FaCss3Alt },
+    { name: "JavaScript", Icon: FaJsSquare },
+    { name: "TypeScript", Icon: SiTypescript },
+    { name: "Angular", Icon: FaAngular },
+    { name: "Vue.js", Icon: FaVuejs },
+    { name: "React.js", Icon: FaReact },
+    { name: "Next.js", Icon: SiNextdotjs },
+    { name: "TailwindCSS", Icon: SiTailwindcss },
+    { name: "Bootstrap", Icon: FaBootstrap },
+    { name: "Redux", Icon: SiRedux },
+    { name: "D3.js", Icon: SiD3Dotjs },
+    { name: "Zustand", Icon: GiBearHead },
+    { name: "Framer Motion", Icon: SiFramer },    
+  ],
+  "backend": [
+    { name: ".Net", Icon: SiDotnet },
+    { name: "Node.js", Icon: FaNodeJs },
+    { name: "Django", Icon: SiDjango },
+    { name: "PostgreSQL", Icon: SiPostgresql },
+    { name: "MySQL", Icon: SiMysql },
+  ],
+  "cloud & tools": [
+    { name: "AWS", Icon: FaAws },
+    { name: "Azure", Icon: FaMicrosoft },
+    { name: "Figma", Icon: FaFigma },
+    { name: "Cypress", Icon: SiCypress },
+    { name: "Docker", Icon: FaDocker },
+    { name: "GitHub Actions", Icon: SiGithubactions },
+  ]
+};
