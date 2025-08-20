@@ -14,8 +14,8 @@ export const projects = [
     },
     {
         id: 1, 
-        title: "BestBefore", 
-        description: "A comprehensive food management system designed to help users track their food inventory and reduce waste." ,
+        title: "Hello", 
+        description: "Good Project" ,
         image: "/projects/bestbefore.png",
         tag: {
             frontend: ["Angular"],

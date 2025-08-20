@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 
-export function useTagFilter(items, getTags = (x) => x.tag ?? {}) {
+export function useFilter(items, getTags = (x) => x.tag ?? {}) {
   const [selected, setSelected] = useState({}); // { [cat]: Set<string> }
 
   const categories = useMemo(() => {

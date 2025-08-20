@@ -146,6 +146,25 @@
   box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
 }
 
+@utility accordion {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition:
+    grid-template-rows 300ms ease-in-out,
+    opacity 300ms ease-in-out,
+    transform 300ms ease-in-out;
+  opacity: 0;
+  transform: translateY(-4px);
+}
+@utility accordion-open {
+  grid-template-rows: 1fr; 
+  opacity: 1;
+  transform: translateY(0);
+}
+@utility accordion-inner {
+  @apply overflow-hidden rounded-xl bg-foreground/5;
+}
+
 #root {
   max-width: 100%;
   margin: 0 auto;
