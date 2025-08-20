@@ -1,90 +1,45 @@
-import { ExternalLink, Github, Search, ChevronLeft, ChevronRight } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
+import { ExternalLink, Github, Search } from "lucide-react";
+import { useEffect, useMemo } from "react";
 import { projects } from "../data/projects";
 import { usePageSize, usePagination } from "../hooks/usePagination";
-import { useScrollToSection } from "../hooks/useScrollToSection"
+import { useScrollToSection } from "../hooks/useScrollToSection";
 import Pagination from "./Pagination";
+import { useSearch } from "../hooks/useSearch";
+import { useFilter } from "../hooks/useFilter";
 
 const ProjectsSection = () => {
   // Search
-  const [query, setQuery] = useState("");
-  const [submittedQuery, setSubmittedQuery] = useState("");
-  const onSubmitSearch = (e) => {
-    e?.preventDefault?.();
-    setSubmittedQuery(query.trim().toLowerCase());
-  };
+  const { query, setQuery, onSubmitSearch, applySearch, resetSearch } =
+    useSearch("", ["title", "description"]);
 
-  // Filters
-  const [selected, setSelected] = useState({});
-  const toggleCheck = (cat, value) => {
-    setSelected((prev) => {
-      const nextSet = new Set(prev[cat] || []);
-      nextSet.has(value) ? nextSet.delete(value) : nextSet.add(value);
-      return { ...prev, [cat]: nextSet };
-    });
-  };
-  const clearFilters = () => setSelected({});
+  // Tag filters
+  const { selected, toggleCheck, clearFilters, categories, options, applyTagFilters } =
+    useFilter(projects, (p) => p.tag ?? {});
 
-  // Categories from data 
-  const categories = useMemo(() => {
-    return Array.from(new Set(projects.flatMap((p) => Object.keys(p.tag ?? {}))));
-  }, []);
-
-  // Filter options per category 
-  const filterOptions = useMemo(() => {
-    const sets = categories.reduce((acc, cat) => {
-      acc[cat] = new Set();
-      return acc;
-    }, {});
-    projects.forEach((project) => {
-      categories.forEach((cat) => {
-        (project.tag?.[cat] || []).forEach((t) => sets[cat].add(t));
-      });
-    });
-    return categories.reduce((acc, cat) => {
-      acc[cat] = Array.from(sets[cat]).sort();
-      return acc;
-    }, {});
-  }, [categories]);
-
-  // Apply search + tag filters
+  // Combine: first tag-filter, then search (order doesn’t really matter)
   const filteredProjects = useMemo(() => {
-    const q = submittedQuery;
-    return projects.filter((p) => {
-      if (q) {
-        const hay = `${p.title ?? ""} ${p.description ?? ""}`.toLowerCase();
-        if (!hay.includes(q)) return false;
-      }
-      for (const cat of categories) {
-        const wanted = selected[cat]; // Set | undefined
-        if (wanted && wanted.size > 0) {
-          const projectTags = p.tag?.[cat] || [];
-          const anyMatch = [...wanted].some((t) => projectTags.includes(t));
-          if (!anyMatch) return false;
-        }
-      }
-      return true;
-    });
-  }, [submittedQuery, selected, categories]);
+    const byTags = applyTagFilters(projects);
+    return applySearch(byTags);
+  }, [applyTagFilters, applySearch]);
 
-  // Constants for Pagination
+  // Pagination
   const pageSize = usePageSize({ lg: 6, md: 4, sm: 3 });
-  const { page, setPage, totalPages, current, getPageButtons } = usePagination(filteredProjects, pageSize);
+  const { page, setPage, totalPages, current, getPageButtons } =
+    usePagination(filteredProjects, pageSize);
 
+  // Reset to page 1 on query/filters/pageSize change
   useEffect(() => {
     setPage(1);
-  }, [submittedQuery, selected, pageSize, setPage]);
+  }, [query, selected, pageSize, setPage]);
 
-  // Constants for Scroll Effect
+  // Scroll on page change
   const scrollToSectionTop = useScrollToSection("projects-top", 80);
-    
   useEffect(() => {
     scrollToSectionTop();
   }, [page, scrollToSectionTop]);
 
   return (
     <section id="projects" className="py-16 px-4">
-      <div id="projects-top" aria-hidden="true" />
       <div className="container mx-auto max-w-5xl">
         {/* Header row: Title + Search */}
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-6">
@@ -113,12 +68,14 @@ const ProjectsSection = () => {
             <p className="text-sm opacity-80">
               Filter by tech stack (OR within a group, AND across groups)
             </p>
-            <button
-              onClick={clearFilters}
-              className="text-xs px-3 py-1 rounded-md bg-foreground/10 hover:bg-foreground/20"
-            >
-              Clear filters
-            </button>
+            <div className="flex gap-2">
+              <button
+                onClick={() => { clearFilters(); resetSearch(); }}
+                className="text-xs px-3 py-1 rounded-md bg-foreground/10 hover:bg-foreground/20"
+              >
+                Clear all
+              </button>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -126,7 +83,7 @@ const ProjectsSection = () => {
               <fieldset key={cat}>
                 <legend className="font-semibold mb-2 capitalize">{cat}</legend>
                 <div className="grid grid-cols-2 gap-2">
-                  {(filterOptions[cat] ?? []).map((opt) => {
+                  {(options[cat] ?? []).map((opt) => {
                     const checked = Boolean(selected[cat]?.has(opt));
                     return (
                       <label key={opt} className="flex items-center gap-2 text-sm">
@@ -146,26 +103,18 @@ const ProjectsSection = () => {
           </div>
         </div>
 
-        {/* Projects Grid (uses paginated "current") */}
+        {/* Projects Grid */}
+        <div id="projects-top" aria-hidden="true" />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-6">
           {current.map((project, index) => (
-            <div
-              key={project.id ?? index}
-              className="group bg-card rounded-lg overflow-hidden shadow-xs card-hover"
-            >
+            <div key={project.id ?? index} className="group bg-card rounded-lg overflow-hidden shadow-xs card-hover">
               <div className="h-48 overflow-hidden">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-full object-cover"
-                />
+                <img src={project.image} alt={project.title} className="w-full h-full object-cover" />
               </div>
 
               <div className="p-6 text-left">
                 <h3 className="text-lg font-bold text-primary">{project.title}</h3>
-                <p className="text-sm mb-4 text-muted-foreground">
-                  {project.description}
-                </p>
+                <p className="text-sm mb-4 text-muted-foreground">{project.description}</p>
 
                 <div className="mb-4 space-y-2">
                   {Object.entries(project.tag).map(([category, items]) => (
@@ -173,10 +122,7 @@ const ProjectsSection = () => {
                       <p className="capitalize">{category}:</p>
                       <div className="flex flex-wrap gap-2">
                         {items.map((item) => (
-                          <span
-                            key={item}
-                            className="px-2 text-xs border rounded-full bg-secondary text-secondary-foreground"
-                          >
+                          <span key={item} className="px-2 text-xs border rounded-full bg-secondary text-secondary-foreground">
                             {item}
                           </span>
                         ))}
@@ -187,21 +133,11 @@ const ProjectsSection = () => {
 
                 <div className="flex justify-end items-center">
                   <div className="flex gap-3">
-                    <a
-                      href={project.demoUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="cosmic-outline-button flex items-center gap-2 px-4 py-1"
-                    >
+                    <a href={project.demoUrl} target="_blank" rel="noopener noreferrer" className="cosmic-outline-button flex items-center gap-2 px-4 py-1">
                       <ExternalLink className="w-4 h-4" />
                       View
                     </a>
-                    <a
-                      href={project.githubUrl || project.githubURl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="cosmic-outline-button flex items-center gap-2 px-4 py-1"
-                    >
+                    <a href={project.githubUrl || project.githubURl} target="_blank" rel="noopener noreferrer" className="cosmic-outline-button flex items-center gap-2 px-4 py-1">
                       <Github className="w-4 h-4" />
                       Git
                     </a>
