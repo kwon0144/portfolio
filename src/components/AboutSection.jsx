@@ -18,7 +18,7 @@ const AboutSection = () => {
               my skills to bridge the gap between business goals and modern technologies while 
               creating intuitive and impactful user experiences.
             </p>
-            <button href="" className="cosmic-outline-button">
+            <button href="null" className="cosmic-outline-button">
               Download Resume
             </button>
           </div>

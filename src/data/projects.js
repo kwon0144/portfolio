@@ -13,7 +13,7 @@ export const projects = [
         githubURl: "https://github.com/kwon0144/BestBefore"
     },
     {
-        id: 1, 
+        id: 2, 
         title: "Hello", 
         description: "Good Project" ,
         image: "/projects/bestbefore.png",
@@ -26,7 +26,7 @@ export const projects = [
         githubURl: "https://github.com/kwon0144/BestBefore"
     },
     {
-        id: 1, 
+        id: 3, 
         title: "BestBefore", 
         description: "A comprehensive food management system designed to help users track their food inventory and reduce waste." ,
         image: "/projects/bestbefore.png",
@@ -39,7 +39,7 @@ export const projects = [
         githubURl: "https://github.com/kwon0144/BestBefore"
     },
     {
-        id: 1, 
+        id: 4, 
         title: "BestBefore", 
         description: "A comprehensive food management system designed to help users track their food inventory and reduce waste." ,
         image: "/projects/bestbefore.png",
@@ -52,7 +52,7 @@ export const projects = [
         githubURl: "https://github.com/kwon0144/BestBefore"
     },
     {
-        id: 1, 
+        id: 5, 
         title: "BestBefore", 
         description: "A comprehensive food management system designed to help users track their food inventory and reduce waste." ,
         image: "/projects/bestbefore.png",
@@ -65,7 +65,7 @@ export const projects = [
         githubURl: "https://github.com/kwon0144/BestBefore"
     },
     {
-        id: 1, 
+        id: 6, 
         title: "BestBefore", 
         description: "A comprehensive food management system designed to help users track their food inventory and reduce waste." ,
         image: "/projects/bestbefore.png",
