@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 import { projects } from "../data/projects";
 import { usePageSize, usePagination } from "../hooks/usePagination";
 import { useScrollToSection } from "../hooks/useScrollToSection"
+import Pagination from "./Pagination";
 
 const ProjectsSection = () => {
   // Search
@@ -13,7 +14,7 @@ const ProjectsSection = () => {
     setSubmittedQuery(query.trim().toLowerCase());
   };
 
-  // Filters (use Sets)
+  // Filters
   const [selected, setSelected] = useState({});
   const toggleCheck = (cat, value) => {
     setSelected((prev) => {
@@ -24,12 +25,12 @@ const ProjectsSection = () => {
   };
   const clearFilters = () => setSelected({});
 
-  // Categories from data (memoized)
+  // Categories from data 
   const categories = useMemo(() => {
     return Array.from(new Set(projects.flatMap((p) => Object.keys(p.tag ?? {}))));
   }, []);
 
-  // Filter options per category (memoized)
+  // Filter options per category 
   const filterOptions = useMemo(() => {
     const sets = categories.reduce((acc, cat) => {
       acc[cat] = new Set();
@@ -46,7 +47,7 @@ const ProjectsSection = () => {
     }, {});
   }, [categories]);
 
-  // Apply search + tag filters (memoized)
+  // Apply search + tag filters
   const filteredProjects = useMemo(() => {
     const q = submittedQuery;
     return projects.filter((p) => {
@@ -66,11 +67,10 @@ const ProjectsSection = () => {
     });
   }, [submittedQuery, selected, categories]);
 
-  // --- NEW: hooks for responsive page size + pagination
+  // Constants for Pagination
   const pageSize = usePageSize({ lg: 6, md: 4, sm: 3 });
   const { page, setPage, totalPages, current, getPageButtons } = usePagination(filteredProjects, pageSize);
 
-  // Reset to first page whenever filters/search/pageSize change
   useEffect(() => {
     setPage(1);
   }, [submittedQuery, selected, pageSize, setPage]);
@@ -147,7 +147,7 @@ const ProjectsSection = () => {
         </div>
 
         {/* Projects Grid (uses paginated "current") */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-6">
           {current.map((project, index) => (
             <div
               key={project.id ?? index}
@@ -219,51 +219,12 @@ const ProjectsSection = () => {
         </div>
 
         {/* Pagination */}
-        {totalPages > 1 && (
-          <nav className="mt-6 flex items-center justify-center gap-2" aria-label="Pagination">
-            <button
-              className="px-3 py-1.5 rounded-md bg-foreground/10 text-foreground hover:bg-foreground/20 disabled:opacity-40"
-              onClick={() => setPage((p) => Math.max(1, p - 1))}
-              disabled={page === 1}
-              aria-label="Previous Page"
-            >
-              <ChevronLeft className="w-5 h-5" />
-            </button>
-
-            <div className="flex items-center gap-1">
-              {getPageButtons().map((n, idx, arr) => {
-                const prev = arr[idx - 1];
-                const showEllipsis = prev && n - prev > 1;
-                return (
-                  <span key={n} className="flex items-center">
-                    {showEllipsis && <span className="px-2 opacity-60">…</span>}
-                    <button
-                      onClick={() => setPage(n)}
-                      aria-current={page === n ? "page" : undefined}
-                      className={[
-                        "px-3 py-1.5 rounded-md text-sm",
-                        page === n
-                          ? "bg-primary text-primary-foreground"
-                          : "bg-foreground/10 text-foreground hover:bg-foreground/20",
-                      ].join(" ")}
-                    >
-                      {n}
-                    </button>
-                  </span>
-                );
-              })}
-            </div>
-
-            <button
-              className="px-3 py-1.5 rounded-md bg-foreground/10 text-foreground hover:bg-foreground/20 disabled:opacity-40"
-              onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-              disabled={page === totalPages}
-              aria-label="Next Page"
-            >
-              <ChevronRight className="w-5 h-5" />
-            </button>
-          </nav>
-        )}
+        <Pagination
+          page={page}
+          totalPages={totalPages}
+          onPageChange={setPage}
+          pages={getPageButtons()}
+        />
       </div>
     </section>
   );

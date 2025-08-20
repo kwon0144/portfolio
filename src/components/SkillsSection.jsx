@@ -1,9 +1,9 @@
-import { ChevronLeft, ChevronRight } from "lucide-react"; 
 import { categories, skills } from "../data/skills"; 
 import { cn } from "../lib/utils"; 
 import { useEffect, useState } from "react"; 
 import { usePageSize, usePagination } from "../hooks/usePagination"; 
 import { useScrollToSection } from "../hooks/useScrollToSection";
+import Pagination from "./Pagination"
 
 const SkillsSection = () => { 
   
@@ -79,46 +79,12 @@ const SkillsSection = () => {
         </div> 
         
         {/* Pagination */} 
-        {totalPages > 1 && ( 
-          <nav className="flex items-center justify-center gap-2" aria-label="Pagination"> 
-            <button 
-              className="pagination-arrow"
-              onClick={() => setPage(p => Math.max(1, p - 1))} 
-              disabled={page === 1} 
-              aria-label="Previous Page" 
-            > 
-              <ChevronLeft className="w-5 h-5" /> 
-            </button> 
-            {/* Numbered buttons */} 
-            <div className="flex items-center gap-1"> 
-              {getPageButtons().map((n, idx, arr) => { 
-                const prev = arr[idx - 1]; 
-                const showEllipsis = prev && n - prev > 1; 
-                return ( 
-                  <span key={n} className="flex items-center"> 
-                    {showEllipsis && 
-                      <span className="px-2 opacity-60">…</span>
-                    } 
-                    <button
-                      className={`pagination-num ${page === n ? "pagination-num-active" : "pagination-num-inactive"}`}
-                      onClick={() => setPage(n)}
-                    >
-                      {n}
-                    </button> 
-                  </span> 
-                ); 
-              })} 
-            </div> 
-            <button
-              className="pagination-arrow"
-              onClick={() => setPage(p => Math.min(totalPages, p + 1))}
-              disabled={page === totalPages}
-              aria-label="Next Page"
-            >
-              <ChevronRight className="w-5 h-5" />
-            </button>
-          </nav> 
-        )} 
+        <Pagination
+          page={page}
+          totalPages={totalPages}
+          onPageChange={setPage}
+          pages={getPageButtons()}
+        />
 
       </div> 
     </section> 
