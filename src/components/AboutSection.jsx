@@ -1,3 +1,4 @@
+import { Facebook, Github, Instagram, Linkedin } from "lucide-react"
 import { experiences } from "../data/experiences"
 
 const AboutSection = () => {
@@ -18,6 +19,22 @@ const AboutSection = () => {
               my skills to bridge the gap between business goals and modern technologies while 
               creating intuitive and impactful user experiences.
             </p>
+            {/* Social Media */}
+            <div className="flex flex-row space-x-4">
+              <a href="https://www.facebook.com/kayee.wong.182/" taget="_blank" >
+                <Facebook />
+              </a>
+              <a href="https://www.instagram.com/kaaaayee__/" target="_blank">
+                <Instagram />
+              </a>
+              <a href="https://au.linkedin.com/in/kinsey-wong-4905811ab" target="_blank">
+                <Linkedin />
+              </a>
+              <a href="https://github.com/kwon0144" target="_blank">
+                <Github />
+              </a>
+            </div>
+            {/* Resume */}
             <button href="null" className="cosmic-outline-button">
               Download Resume
             </button>
