@@ -39,12 +39,12 @@ const SkillsSection = () => {
   }, [page, didUserChangePage, scrollToSectionTop]);
   
   return ( 
-    <section id="skills" className="py-24 px-4 relative bg-secondary/30"> 
+    <section id="skills" className="py-24 px-4 relative"> 
       <div id="skills-top" aria-hidden="true"/> 
       <div className="container mx-auto max-w-5xl"> 
         <div className="grid-cols-1 md:grid-cols-2 flex flex-col md:flex-row gap-6 md:gap-12 justify-between mb-6"> 
           {/* Header */} 
-          <h2 className="text-2xl font-semibold text-left"> 
+          <h2 className="text-2xl font-bold text-left"> 
             My <span className="text-primary">Skills</span> 
           </h2> 
           

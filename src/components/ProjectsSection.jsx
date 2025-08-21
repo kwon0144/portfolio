@@ -47,11 +47,11 @@ const ProjectsSection = () => {
   }, [page, didUserChangePage, scrollToSectionTop]);
 
   return (
-    <section id="projects" className="py-16 px-4">
+    <section id="projects" className="py-24 px-4 relative">
       <div className="container mx-auto max-w-5xl">
         {/* Header row: Title + Search */}
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-          <h2 className="text-2xl font-semibold">
+          <h2 className="text-2xl font-bold">
             <span className="text-primary">Project</span> Gallery
           </h2>
 
