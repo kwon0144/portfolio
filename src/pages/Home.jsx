@@ -7,7 +7,7 @@ import ProjectsSection from '../components/ProjectsSection'
 import ContactSection from '../components/ContactSection'
 import Footer from '../components/Footer'
 
-const Home = () => {
+const Home = ({ ready = true }) => {
   return (
     <div className='min-h-screen bg-background text-foreground overflow-x-hidden'>
 
@@ -19,7 +19,7 @@ const Home = () => {
 
       {/* Main Content */}    
       <main>
-        <HeroSection />
+        <HeroSection ready={ready} />
         <AboutSection />
         <SkillsSection />
         <ProjectsSection />
