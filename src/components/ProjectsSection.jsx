@@ -27,17 +27,24 @@ const ProjectsSection = () => {
   const pageSize = usePageSize({ lg: 6, md: 4, sm: 3 });
   const { page, setPage, totalPages, current, getPageButtons } =
     usePagination(filteredProjects, pageSize);
+  const [didUserChangePage, setDidUserChangePage] = useState(false);
+  const handlePageChange = (newPage) => {
+    setDidUserChangePage(true);
+    setPage(newPage);
+  };
 
   useEffect(() => {
     setPage(1);
+    setDidUserChangePage(false);
   }, [query, selected, pageSize, setPage]);
 
   // Constants for Scroll Effect
   const scrollToSectionTop = useScrollToSection("projects-top", 80);
 
   useEffect(() => {
+    if (!didUserChangePage) return;
     scrollToSectionTop();
-  }, [page, scrollToSectionTop]);
+  }, [page, didUserChangePage, scrollToSectionTop]);
 
   return (
     <section id="projects" className="py-16 px-4">
@@ -204,7 +211,7 @@ const ProjectsSection = () => {
         <Pagination
           page={page}
           totalPages={totalPages}
-          onPageChange={setPage}
+          onPageChange={handlePageChange}
           pages={getPageButtons()}
         />
       </div>

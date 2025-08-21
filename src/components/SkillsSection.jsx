@@ -20,16 +20,23 @@ const SkillsSection = () => {
   // Conastants for pagination 
   const pageSize = usePageSize({lg: 18, md:12, sm:8}); 
   const { page, setPage, totalPages, current, getPageButtons } = usePagination(filteredSkills, pageSize); 
+  const [didUserChangePage, setDidUserChangePage] = useState(false);
+  const handlePageChange = (newPage) => {
+    setDidUserChangePage(true);
+    setPage(newPage);
+  };
 
   // UseEffect for pagination 
   useEffect(() => { 
     setPage(1); 
+    setDidUserChangePage(false);
   }, [activeCategory, setPage]); 
   
   // UseEffect for scrolling effect 
   useEffect(() => {
+    if (!didUserChangePage) return;
     scrollToSectionTop();
-  }, [page, scrollToSectionTop]);
+  }, [page, didUserChangePage, scrollToSectionTop]);
   
   return ( 
     <section id="skills" className="py-24 px-4 relative bg-secondary/30"> 
@@ -82,7 +89,7 @@ const SkillsSection = () => {
         <Pagination
           page={page}
           totalPages={totalPages}
-          onPageChange={setPage}
+          onPageChange={handlePageChange}
           pages={getPageButtons()}
         />
 
