@@ -21,16 +21,16 @@ const AboutSection = () => {
             </p>
             {/* Social Media */}
             <div className="flex flex-row space-x-4">
-              <a href="https://www.facebook.com/kayee.wong.182/" taget="_blank" >
+              <a href="https://www.facebook.com/kayee.wong.182/" taget="_blank" className="hover:text-primary">
                 <Facebook />
               </a>
-              <a href="https://www.instagram.com/kaaaayee__/" target="_blank">
+              <a href="https://www.instagram.com/kaaaayee__/" target="_blank" className="hover:text-primary">
                 <Instagram />
               </a>
-              <a href="https://au.linkedin.com/in/kinsey-wong-4905811ab" target="_blank">
+              <a href="https://au.linkedin.com/in/kinsey-wong-4905811ab" target="_blank" className="hover:text-primary">
                 <Linkedin />
               </a>
-              <a href="https://github.com/kwon0144" target="_blank">
+              <a href="https://github.com/kwon0144" target="_blank" className="hover:text-primary">
                 <Github />
               </a>
             </div>
