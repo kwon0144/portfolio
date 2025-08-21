@@ -4,11 +4,11 @@ import { Menu, X } from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
 
 const navItems = [
-    { name: 'Home', path: '#hero' },
-    { name: 'About', path: '#about' },
-    { name: 'Skills', path: '#skills' },
-    { name: 'Projects', path: '#projects' },
-    { name: 'Contact', path: '#contact' },
+    { name: 'Home', path: '/#hero' },
+    { name: 'About', path: '/#about' },
+    { name: 'Skills', path: '/#skills' },
+    { name: 'Projects', path: '/#projects' },
+    { name: 'Contact', path: '/#contact' },
 ]
 
 const Navbar = () => {
@@ -31,7 +31,7 @@ const Navbar = () => {
             isScrolled ? "py-3 bg-background/80 backdrop-blur-lg shadow-xs" : "py-5")}
         >
             <div className='container flex items-center justify-between'>
-                <a className='text-xl font-bold text-primary flex items-center' href="#hero">
+                <a className='text-xl font-bold text-primary flex items-center' href="/#hero">
                     <span className='relative z-10'>
                         <span className='text-glow text-foreground'>Kinsey</span>Protfolio
                     </span>
