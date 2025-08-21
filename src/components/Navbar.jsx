@@ -4,10 +4,10 @@ import { Menu, X } from 'lucide-react';
 
 const navItems = [
     { name: 'Home', path: '#hero' },
-    { name: 'About', path: '/about' },
-    { name: 'Skills', path: '/skills' },
-    { name: 'Projects', path: '/projects' },
-    { name: 'Contact', path: '/contact' },
+    { name: 'About', path: '#about' },
+    { name: 'Skills', path: '#skills' },
+    { name: 'Projects', path: '#projects' },
+    { name: 'Contact', path: '#contact' },
 ]
 
 const Navbar = () => {
