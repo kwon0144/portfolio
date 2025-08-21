@@ -91,7 +91,7 @@ const ContactSection = () => {
                             id="name"
                             name="name"
                             required
-                            className='w-full px-4 py-3 rounded-xl border border-input bg-background focus:outline-hidden focus:ring-2 focus:ring-primary/40'
+                            className='w-full px-4 py-3 rounded-xl border border-input bg-foreground/5 text-foreground focus:outline-hidden focus:ring-2 focus:ring-primary/40'
                             placeholder='Your Name'
                             value={formData.name}
                             onChange={(e) => setFormData({...formData, name: e.target.value})}
@@ -102,7 +102,7 @@ const ContactSection = () => {
                             id="email"
                             name="email"
                             required
-                            className='w-full px-4 py-3 rounded-xl border border-input bg-background focus:outline-hidden focus:ring-2 focus:ring-primary/40'
+                            className='w-full px-4 py-3 rounded-xl border border-input bg-foreground/5 text-foreground focus:outline-hidden focus:ring-2 focus:ring-primary/40'
                             placeholder='Your Email'
                             value={formData.email}
                             onChange={(e) => setFormData({...formData, email: e.target.value})}
@@ -113,7 +113,7 @@ const ContactSection = () => {
                             name="message"
                             required
                             rows={5}
-                            className='w-full px-4 py-3 rounded-xl border border-input bg-background focus:outline-hidden focus:ring-2 focus:ring-primary/40 resize-none'
+                            className='w-full px-4 py-3 rounded-xl border border-input bg-foreground/5 text-foreground focus:outline-hidden focus:ring-2 focus:ring-primary/40 resize-none'
                             placeholder='Type your message here...'
                             value={formData.message}
                             onChange={(e) => setFormData({...formData, message: e.target.value})}
