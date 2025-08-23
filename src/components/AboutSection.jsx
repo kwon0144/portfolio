@@ -35,9 +35,9 @@ const AboutSection = () => {
               </a>
             </div>
             {/* Resume */}
-            <button href="null" className="cosmic-outline-button">
+            <a href="/Kinsey_SWE_Resume.pdf" download className="cosmic-outline-button">
               Download Resume
-            </button>
+            </a>
           </div>
 
           {/* Experience*/}
